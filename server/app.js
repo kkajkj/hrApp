@@ -9,9 +9,8 @@ const connectDB = require("./Database");
 dotenv.config();
 
 const app = express();
-console.log('Frontend URL:', process.env.FRONTEND_URL);
 const corsOptions = {
-  origin:"http://localhost:3000", // your actual frontend URL
+  origin:"https://hrapp-frontend.onrender.com/", // your actual frontend URL
   methods: ["POST"],
   credentials: true,
 };
