@@ -44,7 +44,7 @@ const SignupForm = () => {
 
     try {
       // Send form data to the server
-      const response = await fetch("https://hrapp-backend.onrender.com", {
+      const response = await fetch("https://hrapp-backend.onrender.com/api/signup", {
         method: "POST",
         body: data,
       });
