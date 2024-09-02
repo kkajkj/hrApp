@@ -21,21 +21,24 @@ const handleSubmit = async (e) => {
       credentials: "include", // If you need to send cookies/auth headers
     });
 
-    // Check if response is JSON
-    const contentType = response.headers.get("content-type");
-    let result;
-    if (contentType && contentType.includes("application/json")) {
-      result = await response.json();
-    } else {
-      result = { message: "Unexpected response format from server" };
-    }
+    // Read the response as text
+    const responseText = await response.text();
 
-    if (response.ok) {
-      // Redirect to confirmation page on successful signup
-      window.location.href = "/confirmation";
+    // Check if response is empty
+    if (responseText) {
+      // Attempt to parse JSON if there is a response
+      const result = JSON.parse(responseText);
+
+      if (response.ok) {
+        // Redirect to confirmation page on successful signup
+        window.location.href = "/confirmation";
+      } else {
+        // Set error message from server response
+        setError(result.message || "An error occurred. Please try again.");
+      }
     } else {
-      // Set error message from server response
-      setError(result.message);
+      // If response is empty, set a generic error message
+      setError("An empty response was received from the server.");
     }
   } catch (error) {
     // Handle any errors that occur during the fetch request
