@@ -10,7 +10,7 @@ dotenv.config();
 
 const app = express();
 const corsOptions = {
-  origin:"https://hrapp-frontend.onrender.com", // your actual frontend URL
+  origin:"https://hrapp-frontend.onrender.com/", // your actual frontend URL
   methods: ["POST"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
